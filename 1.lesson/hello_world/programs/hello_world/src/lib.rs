@@ -22,7 +22,11 @@ pub struct Initialize<'info> {
     #[account(
         init,
         payer = signer,
-        space = 8 + HelloWorldAccount::INIT_SPACE,
+        // The `init` constraint with `InitSpace` derive macro automatically handles the space calculation.
+        // You don't need to manually specify `space = 8 + HelloWorldAccount::INIT_SPACE`
+        // when using the `#[derive(InitSpace)]` macro on the account struct.
+        // Anchor will automatically calculate the space needed including the discriminator.
+        space = 8 + 32 + 4, // 8 for discriminator, 32 for max_len string, 4 for string length prefix
     )]
     pub hello_world_account: Account<'info, HelloWorldAccount>,
     pub system_program: Program<'info, System>,
