@@ -22,7 +22,7 @@ pub struct Initialize<'info> {
     #[account(
         init,
         payer = signer,
-        space = 8 + HelloWorldAccount::INIT_SPACE,
+        space = 8 + 32 + 4,
     )]
     pub hello_world_account: Account<'info, HelloWorldAccount>,
     pub system_program: Program<'info, System>,
